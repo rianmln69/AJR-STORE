@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AJR STORE - Dimsum, Alpukat Kocok & Es Lemon Tea</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#C8102E;--red-d:#9B0C24;--gold:#F4B63F;--bg:#FFF9F0;--card:#FFFFFF;--ink:#2A1512;--mute:#7A625C;--line:#F0DFD2;--tint:#FDE8E8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1D0F0D;--card:#2A1815;--ink:#FBEFE6;--mute:#C4A9A0;--line:#452724;--tint:#3D1A1D}}
+:root[data-theme="dark"]{--bg:#1D0F0D;--card:#2A1815;--ink:#FBEFE6;--mute:#C4A9A0;--line:#452724;--tint:#3D1A1D}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;line-height:1.6}
+h1,h2,h3,.brand{font-family:'Fredoka','Nunito',sans-serif;margin:0}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:20;background:var(--red);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.brand{font-size:1.4rem;font-weight:700;letter-spacing:.5px;text-decoration:none}
+.brand span{color:var(--gold)}
+nav{display:flex;gap:18px;font-weight:700;font-size:.95rem}nav a{text-decoration:none;opacity:.92}nav a:hover{opacity:1;text-decoration:underline}
+.cartbtn{background:var(--gold);color:#3a1600;border:0;border-radius:99px;padding:8px 16px;font:700 .95rem 'Nunito';cursor:pointer;display:flex;gap:8px;align-items:center}
+.cartbtn b{background:var(--red);color:#fff;border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center;font-size:.8rem}
+.hero{background:var(--red);color:#fff;padding:48px 0 70px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.08;font-weight:700}
+.hero p{max-width:46ch;font-size:1.08rem;opacity:.95}
+.btn{display:inline-block;border:0;border-radius:12px;padding:12px 22px;font:700 1rem 'Nunito';cursor:pointer;text-decoration:none}
+.btn-gold{background:var(--gold);color:#3a1600}.btn-line{border:2px solid #fff;color:#fff;background:transparent}
+.plate{font-size:6.5rem;text-align:center;background:rgba(255,255,255,.12);border-radius:50%;aspect-ratio:1;display:grid;place-items:center;max-width:300px;margin:auto;border:6px dashed var(--gold)}
+.wave{position:absolute;bottom:-1px;left:0;width:100%;height:36px;background:var(--bg);clip-path:ellipse(60% 100% at 50% 100%)}
+section{padding:54px 0}section h2{font-size:2rem;color:var(--red);margin-bottom:6px}
+[data-theme="dark"] section h2{color:#FF6B7F}
+.sub{color:var(--mute);margin:0 0 26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{font-size:4rem;text-align:center;padding:22px;background:var(--tint)}
+.card .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{font-size:1.25rem}.card p{margin:0;color:var(--mute);font-size:.93rem;flex:1}
+.tag{align-self:flex-start;background:var(--gold);color:#3a1600;font-size:.75rem;font-weight:700;border-radius:99px;padding:2px 10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font:600 1.2rem 'Fredoka';color:var(--red)}[data-theme="dark"] .price{color:#FF6B7F}
+.add{background:var(--red);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:700 .95rem 'Nunito';cursor:pointer}
+.add:hover{background:var(--red-d)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.why div{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--red);border-radius:12px;padding:16px}
+.why b{display:block;font-family:'Fredoka';font-size:1.1rem}
+.band{background:var(--tint)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.info h3{font-size:1.15rem;margin-bottom:6px}.info p{margin:0;color:var(--mute)}
+footer{background:var(--ink);color:#FBEFE6;padding:26px 0;text-align:center;font-size:.9rem}
+footer b{color:var(--gold)}
+/* keranjang */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.25s;z-index:30}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--bg);z-index:31;transform:translateX(105%);transition:transform .3s;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:var(--red);color:#fff}
+.dh h3{font-size:1.25rem}.x{background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+.items{flex:1;overflow:auto;padding:14px 18px}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+.it{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.it .e{font-size:1.8rem;background:var(--tint);border-radius:10px;width:46px;height:46px;display:grid;place-items:center}
+.it .n{flex:1}.it .n b{display:block}.it .n small{color:var(--mute)}
+.q{display:flex;align-items:center;gap:8px}
+.q button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:700;cursor:pointer}
+.foot{padding:14px 18px;border-top:1px solid var(--line);background:var(--card);display:grid;gap:8px}
+.foot input,.foot textarea,.foot select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.sum{display:flex;justify-content:space-between;font:600 1.15rem 'Fredoka'}
+.sum span:last-child{color:var(--red)}
+.foot .btn{width:100%;background:#1FA855;color:#fff;text-align:center}
+#res[hidden]{display:none!important}
+.foot .btn:disabled{opacity:.5;cursor:not-allowed}
+.err{color:var(--red);font-size:.85rem;min-height:1em}
+.wafab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;background:#1FA855;color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:12px 18px;box-shadow:0 4px 14px rgba(0,0,0,.3);display:flex;gap:8px;align-items:center}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-weight:700;z-index:40;transition:.3s}
+.toast.on{transform:translate(-50%,0)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:720px){nav{display:none}.hero .wrap{grid-template-columns:1fr}.plate{max-width:180px;font-size:4.5rem;order:-1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="#atas">AJR <span>STORE</span></a>
+<nav><a href="#menu">Menu</a><a href="#keunggulan">Keunggulan</a><a href="#info">Info & Kontak</a></nav>
+<button class="cartbtn" id="openCart" aria-label="Buka keranjang">🛒 Keranjang <b id="cnt">0</b></button>
+</div></header>
+
+<div class="hero" id="atas"><div class="wrap">
+<div>
+<h1>Dimsum hangat, minuman segar, langsung diantar.</h1>
+<p>Pilih menu favoritmu, masukkan ke keranjang, lalu kirim pesanan lewat WhatsApp. Cepat dan tanpa ribet.</p>
+<p style="margin-top:22px"><a class="btn btn-gold" href="#menu">Pesan sekarang</a> <a class="btn btn-line" href="https://api.whatsapp.com/send?phone=6281389219260&text=Halo%20AJR%20STORE%2C%20saya%20mau%20tanya%20menu." target="_blank" rel="noopener">Chat WhatsApp</a></p>
+</div>
+<div class="plate" aria-hidden="true">🥟</div>
+</div><div class="wave"></div></div>
+
+<section id="menu"><div class="wrap">
+<h2>Menu AJR STORE</h2>
+<p class="sub">Semua dibuat segar setiap hari.</p>
+<div class="grid" id="menuGrid"></div>
+</div></section>
+
+<section id="keunggulan" class="band"><div class="wrap">
+<h2>Kenapa pilih AJR STORE?</h2><p class="sub">Kecil, tapi serius soal rasa.</p>
+<div class="why">
+<div><b>Digoreng saat dipesan</b>Dimsum selalu panas dan renyah.</div>
+<div><b>Bahan segar</b>Alpukat dan lemon dipilih setiap hari.</div>
+<div><b>Harga bersahabat</b>Mulai dari Rp10.000 saja.</div>
+<div><b>Pesan lewat WhatsApp</b>Tinggal klik, pesanan langsung terkirim.</div>
+</div></div></section>
+
+<section id="info"><div class="wrap">
+<h2>Info & Kontak</h2><p class="sub">Ambil di tempat atau minta diantar.</p>
+<div class="info">
+<div><h3>📍 Lokasi</h3><p>Alamat lengkap AJR STORE (ubah sesuai lokasi usaha Anda).</p></div>
+<div><h3>🕘 Jam buka</h3><p>Setiap hari, 10.00 - 21.00 WIB.</p></div>
+<div><h3>💬 WhatsApp</h3><p><a href="https://api.whatsapp.com/send?phone=6281389219260&text=Halo%20AJR%20STORE%2C%20saya%20mau%20tanya%20menu." target="_blank" rel="noopener">0813-8921-9260</a> - klik untuk chat langsung.</p></div>
+<div><h3>💳 Pembayaran</h3><p>Tunai, transfer bank, atau QRIS saat pesanan dikonfirmasi.</p></div>
+</div></div></section>
+
+<footer><div class="wrap">© <span id="yr"></span> <b>AJR STORE</b>. UMKM makanan & minuman lokal.</div></footer>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Keranjang belanja">
+<div class="dh"><h3>Keranjang Anda</h3><button class="x" id="closeCart" aria-label="Tutup">×</button></div>
+<div class="items" id="items"></div>
+<div class="foot" id="foot">
+<div class="sum"><span>Subtotal</span><span id="sub">Rp0</span></div>
+<input id="nama" placeholder="Nama Anda" autocomplete="name">
+<select id="tipe"><option value="Ambil di tempat">Ambil di tempat</option><option value="Diantar">Diantar</option></select>
+<textarea id="alamat" rows="2" placeholder="Alamat pengantaran" hidden></textarea>
+<textarea id="cat" rows="2" placeholder="Catatan (misal: tanpa gula)"></textarea>
+<div class="err" id="err"></div>
+<button class="btn" id="wa">Pesan via WhatsApp</button>
+<div id="res" hidden style="display:grid;gap:8px">
+<b>Pesanan siap dikirim ke AJR STORE</b>
+<textarea id="msg" rows="6" readonly></textarea>
+<button class="btn" id="copy" type="button" style="background:var(--gold);color:#3a1600">1. Salin pesanan</button>
+<a class="btn" id="lnkApp" style="background:#1FA855;color:#fff;text-align:center">2. Buka aplikasi WhatsApp</a>
+<a class="btn" id="lnkWeb" target="_blank" rel="noopener" style="background:transparent;color:var(--ink);border:2px solid #1FA855;text-align:center">Atau buka WhatsApp Web</a>
+<small style="color:var(--mute)">Jika chat terbuka kosong, tempel pesanan yang sudah disalin lalu kirim. Nomor tujuan: 0813-8921-9260.</small>
+<button id="back" type="button" style="background:none;border:0;color:var(--red);font-weight:700;cursor:pointer">Ubah pesanan</button>
+</div>
+</div>
+</aside>
+<a class="wafab" href="https://api.whatsapp.com/send?phone=6281389219260&text=Halo%20AJR%20STORE%2C%20saya%20mau%20tanya%20menu." target="_blank" rel="noopener" aria-label="Chat WhatsApp AJR STORE">💬 Chat WhatsApp</a>
+<div class="toast" id="toast"></div>
+
+<script>
+var WA="6281389219260"; // nomor WhatsApp AJR STORE
+var MENU=[
+{id:"dimsum",nama:"Dimsum Goreng",ket:"Isi 3 pcs, renyah di luar, juicy di dalam.",harga:25000,e:"🥟",tag:"Terlaris",unit:"porsi (3 pcs)"},
+{id:"alpukat",nama:"Alpukat Kocok",ket:"Alpukat asli dikocok dengan susu cokelat.",harga:15000,e:"🥑",unit:"gelas"},
+{id:"lemon",nama:"Es Lemon Tea",ket:"Teh segar dengan perasan lemon dan es.",harga:10000,e:"🍋",unit:"gelas"}];
+var cart={};
+try{cart=JSON.parse(localStorage.getItem("ajr_cart")||"{}")||{}}catch(e){cart={}}
+var $=function(i){return document.getElementById(i)};
+var rp=function(n){return "Rp"+n.toLocaleString("id-ID")};
+function save(){try{localStorage.setItem("ajr_cart",JSON.stringify(cart))}catch(e){}}
+function toast(t){var el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove("on")},1600)}
+$("menuGrid").innerHTML=MENU.map(function(m){return '<div class="card"><div class="thumb" aria-hidden="true">'+m.e+'</div><div class="body">'+(m.tag?'<span class="tag">'+m.tag+'</span>':'')+'<h3>'+m.nama+'</h3><p>'+m.ket+'</p><div class="row"><span class="price">'+rp(m.harga)+'<small style="font:600 .75rem Nunito;color:var(--mute)"> /'+m.unit+'</small></span><button class="add" data-id="'+m.id+'">+ Keranjang</button></div></div></div>'}).join("");
+document.addEventListener("click",function(e){
+var b=e.target.closest("[data-id]");if(b&&b.classList.contains("add")){ch(b.dataset.id,1);toast("Ditambahkan ke keranjang");return}
+var a=e.target.closest("[data-act]");if(a)ch(a.dataset.i,a.dataset.act==="p"?1:-1)});
+function ch(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];save();render()}
+function total(){return MENU.reduce(function(s,m){return s+(cart[m.id]||0)*m.harga},0)}
+function render(){
+var n=0,html="";
+MENU.forEach(function(m){var q=cart[m.id]||0;if(!q)return;n+=q;
+html+='<div class="it"><div class="e">'+m.e+'</div><div class="n"><b>'+m.nama+'</b><small>'+rp(m.harga)+' x '+q+' = '+rp(m.harga*q)+'</small></div><div class="q"><button data-act="m" data-i="'+m.id+'" aria-label="Kurangi">-</button><b>'+q+'</b><button data-act="p" data-i="'+m.id+'" aria-label="Tambah">+</button></div></div>'});
+$("items").innerHTML=html||'<div class="empty">🛒<br>Keranjang masih kosong.<br>Pilih menu dulu, ya.</div>';
+$("cnt").textContent=n;$("sub").textContent=rp(total());
+$("foot").style.display=n?"grid":"none"}
+function open_(o){$("drawer").classList.toggle("on",o);$("ov").classList.toggle("on",o)}
+$("openCart").onclick=function(){open_(true)};$("closeCart").onclick=$("ov").onclick=function(){open_(false)};
+$("tipe").onchange=function(){$("alamat").hidden=this.value!=="Diantar"};
+$("wa").onclick=function(){
+var nama=$("nama").value.trim(),tipe=$("tipe").value,al=$("alamat").value.trim();
+if(!nama){$("err").textContent="Isi nama Anda dulu.";return}
+if(tipe==="Diantar"&&!al){$("err").textContent="Isi alamat pengantaran.";return}
+$("err").textContent="";
+var t="Halo AJR STORE, saya mau pesan:\n";
+MENU.forEach(function(m){var q=cart[m.id]||0;if(q)t+="- "+m.nama+" x"+q+" = "+rp(q*m.harga)+"\n"});
+t+="\nSubtotal: "+rp(total())+"\nNama: "+nama+"\nMetode: "+tipe+(tipe==="Diantar"?"\nAlamat: "+al:"");
+if($("cat").value.trim())t+="\nCatatan: "+$("cat").value.trim();
+var enc=encodeURIComponent(t);
+$("msg").value=t;
+$("lnkWeb").href="https://api.whatsapp.com/send?phone="+WA+"&text="+enc;
+$("lnkApp").href="whatsapp://send?phone="+WA+"&text="+enc;
+$("res").hidden=false;$("wa").hidden=true;
+if(window.top===window){window.open($("lnkWeb").href,"_blank")}
+$("res").scrollIntoView({block:"nearest"})};
+$("copy").onclick=function(){var m=$("msg");m.select();var ok=false;
+try{ok=document.execCommand("copy")}catch(e){}
+toast(ok?"Pesanan disalin. Tempel di chat WhatsApp.":"Tekan Ctrl+C untuk menyalin.")};
+$("back").onclick=function(){$("res").hidden=true;$("wa").hidden=false};
+$("yr").textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
